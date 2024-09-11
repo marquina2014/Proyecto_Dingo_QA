@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './Scr/Home.js';
 import Login from './Scr/Login.js';
-import Register from './Scr/Register.js';
+import Register from './Scr/Register.js'; 
+import MenuScreen from './Scr/CartScreen.js';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,8 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Registro" component={Register} />
-      </Stack.Navigator>
+        <Stack.Screen name="Menu" component={MenuScreen} />
+       </Stack.Navigator>
     </NavigationContainer>
   );
 }

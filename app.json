@@ -1,5 +1,11 @@
 {
   "expo": {
+    "colors": {
+      "primary": "#3498db",
+      "secondary": "#f1c40f",
+      "background": "#f9f9f9",
+      "text": "#333333"
+    },
     "name": "Proyecto_Dingo_QA",
     "slug": "Proyecto_Dingo_QA",
     "version": "1.0.0",
