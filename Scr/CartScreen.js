@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, Image, Dimensions } from 'react-native';
-import { colors } from '../app.json';
+import { View, Text, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';  // Importar íconos de FontAwesome
+import appConfig from '../app.json';  // Importar app.json
+
+const colors = appConfig.expo.colors;
 
 const menuItems = [
   { id: 1, name: 'Inicio', icon: 'home' },
@@ -60,6 +63,27 @@ const styles = {
     fontSize: 18,
     color: colors.text,
   },
+  // Estilo mejorado del botón de menú
+  menuButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    width: 50,
+    height: 50,
+    backgroundColor: colors.primary,
+    borderRadius: 25,  // Hacerlo circular
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,  // Sombra para Android
+  },
+  icon: {
+    fontSize: 24,
+    color: '#fff',
+  },
 };
 
 const MenuItem = ({ item }) => {
@@ -70,9 +94,9 @@ const MenuItem = ({ item }) => {
   );
 };
 
-const Opcion = ({ item }) => {
+const Opcion = ({ item, onPress }) => {
   return (
-    <TouchableOpacity style={styles.opcion}>
+    <TouchableOpacity style={styles.opcion} onPress={onPress}>
       <Text style={styles.opcionText}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -92,9 +116,11 @@ const MenuScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={{ position: 'absolute', top: 10, left: 10, zIndex: 1 }} onPress={handleDrawerToggle}>
-      <Image source={require('./assets/icon.png')} />
+      {/* Botón de menú estilizado */}
+      <TouchableOpacity style={styles.menuButton} onPress={handleDrawerToggle}>
+        <Icon name="bars" style={styles.icon} />  {/* Icono de menú */}
       </TouchableOpacity>
+
       {drawerOpen && (
         <View style={styles.drawerContainer}>
           <FlatList
@@ -106,19 +132,53 @@ const MenuScreen = () => {
             <FlatList
               data={opciones}
               renderItem={({ item }) => (
-                <Opcion item={item} onPress={() => handleSelect(item)} />
+                <Opcion
+                  item={item}
+                  onPress={() => handleSelect(item)}
+                />
               )}
               keyExtractor={(item) => item.id.toString()}
             />
           </View>
         </View>
       )}
+
       {selected && (
-        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <View style={{ position: 'absolute', top: '50%', left: '50%', transform: [{ translateX: -100 }, { translateY: -100 }], backgroundColor: colors.background, padding: 20, borderRadius: 10 }}>
-            <Text style={{ fontSize: 24, fontWeight: 'bold', color: colors.text }}>{selected.name}</Text>
-            <Text style={{ fontSize: 18, color: colors.text }}>Opciones:</Text>
-            <TouchableOpacity style={{ width: '100%', height: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.primary, borderRadius: 5 }}>
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+          }}
+        >
+          <View
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: [{ translateX: -100 }, { translateY: -100 }],
+              backgroundColor: colors.background,
+              padding: 20,
+              borderRadius: 10,
+            }}
+          >
+            <Text style={{ fontSize: 24, fontWeight: 'bold', color: colors.text }}>
+              {selected.name}
+            </Text>
+            <TouchableOpacity
+              style={{
+                width: '100%',
+                height: 40,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: colors.primary,
+                borderRadius: 5,
+                marginTop: 10,
+              }}
+            >
               <Text style={{ fontSize: 18, color: '#fff' }}>Ir a {selected.name}</Text>
             </TouchableOpacity>
           </View>
