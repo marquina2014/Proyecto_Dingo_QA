@@ -1,93 +1,59 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/FontAwesome';  // Importar íconos de FontAwesome
-import { styles2 } from './Styles2.js';  // Importar los estilos desde styles2
+import { styles2 } from './Styles2';  // Usamos tus estilos mejorados
 
-const menuItems = [
-  { id: 1, name: 'Inicio', icon: 'home' },
-  { id: 2, name: 'Categorías', icon: 'list' },
-  { id: 3, name: 'Carrito', icon: 'shopping-cart' },
-  { id: 4, name: 'Perfil', icon: 'user' },
-];
-
-const opciones = [
-  { id: 1, name: 'Ajustes', icon: 'cog' },
-  { id: 2, name: 'Ayuda', icon: 'question-circle' },
-  { id: 3, name: 'Cerrar sesión', icon: 'sign-out-alt' },
-];
-
-const MenuItem = ({ item }) => {
-  return (
-    <TouchableOpacity style={styles2.menuItem}>
-      <Text style={styles2.menuText}>{item.name}</Text>
-    </TouchableOpacity>
-  );
-};
-
-const Opcion = ({ item, onPress }) => {
-  return (
-    <TouchableOpacity style={styles2.opcion} onPress={onPress}>
-      <Text style={styles2.opcionText}>{item.name}</Text>
-    </TouchableOpacity>
-  );
-};
-
-const MenuScreen = () => {
-  const [selected, setSelected] = useState(null);
+const CartScreen = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const handleSelect = (item) => {
-    setSelected(item);
-  };
-
+  // Función para manejar el menú desplegable
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
 
   return (
     <View style={styles2.container}>
+      {/* Botón para desplegar el menú lateral */}
       <TouchableOpacity style={styles2.menuButton} onPress={handleDrawerToggle}>
-        <Icon name="bars" style={styles2.icon} />  {/* Icono de menú */}
+        <Icon name="bars" style={styles2.icon} />
       </TouchableOpacity>
 
+      {/* Vista del mapa */}
+      <MapView
+        style={styles2.mapStyle}  // Mapa con estilo completo
+        initialRegion={{
+          latitude: -34.6037,  // Latitud inicial
+          longitude: -58.3816,  // Longitud inicial
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      >
+        <Marker
+          coordinate={{ latitude: -34.6037, longitude: -58.3816 }}
+          title="Ubicación actual"
+        />
+      </MapView>
+
+      {/* Menú lateral (desplegable) */}
       {drawerOpen && (
         <View style={styles2.drawerContainer}>
-          <FlatList
-            data={menuItems}
-            renderItem={({ item }) => <MenuItem item={item} />}
-            keyExtractor={(item) => item.id.toString()}
-          />
-          <View style={styles2.opcionesContainer}>
-            <FlatList
-              data={opciones}
-              renderItem={({ item }) => (
-                <Opcion
-                  item={item}
-                  onPress={() => handleSelect(item)}
-                />
-              )}
-              keyExtractor={(item) => item.id.toString()}
-            />
-          </View>
+          <Text style={styles2.menuText}>Información del Usuario</Text>
+          {/* Aquí puedes agregar más información del usuario */}
         </View>
       )}
 
-      {selected && (
-        <View
-          style={styles2.overlay}
-        >
-          <View style={styles2.selectedContainer}>
-            <Text style={styles2.selectedText}>
-              {selected.name}
-            </Text>
-            <TouchableOpacity style={styles2.goButton}>
-              <Text style={styles2.goButtonText}>Ir a {selected.name}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
+      {/* Botón principal para solicitar servicio */}
+      <TouchableOpacity style={styles2.goButton}>
+        <Text style={styles2.goButtonText}>Solicitar Servicio</Text>
+      </TouchableOpacity>
+
+      {/* Botón que lleva al inicio */}
+      <TouchableOpacity style={styles2.menuButton} onPress={() => {/* Función para ir al inicio */}}>
+        <Icon name="home" style={styles2.icon} />
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default MenuScreen;
+export default CartScreen;

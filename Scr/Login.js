@@ -1,46 +1,44 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from './Styles';
-import { useNavigation } from '@react-navigation/native';
+import CartScreen from './CartScreen';  // Importar la pantalla de destino (CartScreen)
 
-export default function Login() {
-  // Estado para seleccionar el tipo de login (conductor o comercio)
-  const [role, setRole] = useState('conductor'); // Valores posibles: 'conductor' o 'comercio'
-  
-  // Estado para almacenar las credenciales de usuario
+export default function Login({ role }) {
+  // Estados para almacenar las credenciales de usuario y si el login fue exitoso
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
-  const navigation = useNavigation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  // Estado para manejar si el usuario está logueado
 
   // Datos de ejemplo para usuarios conductores y comercios
-  const userConductor = { username: 'Conductor1', password: '123' };
-  const userComercio = { username: 'Comercio1', password: '456' };
+  const userConductor = { username: 'Luis', password: '123' };
+  const userComercio = { username: 'rafael', password: '123' };
 
   // Función que maneja el inicio de sesión
   const handleLogin = () => {
     // Verifica las credenciales según el rol seleccionado
     if (role === 'conductor') {
       if (username === userConductor.username && password === userConductor.password) {
-        navigation.navigate('MenuConductor'); // Navega al menú de conductor
+        setIsLoggedIn(true);  // Cambia el estado a "logueado"
       } else {
         alert('Credenciales incorrectas para conductor');
       }
     } else if (role === 'comercio') {
       if (username === userComercio.username && password === userComercio.password) {
-        navigation.navigate('MenuComercio'); // Navega al menú de comercio
+        setIsLoggedIn(true);  // Cambia el estado a "logueado"
       } else {
         alert('Credenciales incorrectas para comercio');
       }
     }
   };
 
+  // Si el usuario está logueado, renderiza CartScreen
+  if (isLoggedIn) {
+    return <CartScreen />;  // Muestra la pantalla de CartScreen si el login fue exitoso
+  }
+
+  // Si no está logueado, muestra el formulario de login
   return (
     <View style={styles.container}>
-      {/* Botones para seleccionar entre Conductor o Comercio */}
-      
-
-      {/* Formulario de inicio de sesión */}
       <Text style={styles.title}>Iniciar sesión {role === 'conductor' ? 'Conductor' : 'Comercio'}</Text>
       <TextInput
         style={styles.input}

@@ -23,8 +23,8 @@ export default function Comercio() {
         </View>
       )}
 
-      {/* Pantalla de Login */}
-      {screen === 'Login' && <Login />}
+      {/* Pantalla de Login, pasa el rol "comercio" como prop */}
+      {screen === 'Login' && <Login role="comercio" />}
 
       {/* Pantalla de Registro */}
       {screen === 'Register' && <Register />}
