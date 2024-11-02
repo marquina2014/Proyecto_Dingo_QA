@@ -23,8 +23,8 @@ export default function Conductor() {
         </View>
       )}
 
-      {/* Pantalla de Login */}
-      {screen === 'Login' && <Login />}
+      {/* Pantalla de Login, pasa el rol "conductor" como prop */}
+      {screen === 'Login' && <Login role="conductor" />}
 
       {/* Pantalla de Registro */}
       {screen === 'Register' && <Register />}

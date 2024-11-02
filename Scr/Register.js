@@ -15,7 +15,7 @@ export default function Register() {
 
 
       
-      <TextInput style={styles.input} placeholder="Numero Telefono" secureTextEntry={true} />
+      <TextInput style={styles.input} placeholder="Numero Telefono" />
       <TextInput style={styles.input} placeholder="Nombre de usuario" />
       
       <View style={styles.buttonContainer}>

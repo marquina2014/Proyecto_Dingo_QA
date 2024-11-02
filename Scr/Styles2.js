@@ -1,58 +1,41 @@
 import { Dimensions } from 'react-native';
-import appConfig from '../app.json';  // Importar app.json
+import appConfig from '../app.json';
 
 const colors = appConfig.expo.colors;
+const { width, height } = Dimensions.get('window');
 
 export const styles2 = {
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    borderColor: '#FF6347', // Rojo tomate
+    borderWidth: 2,
   },
   drawerContainer: {
-    flex: 1,
-    backgroundColor: colors.background,
-    width: Dimensions.get('window').width * 0.8,
-    paddingHorizontal: 10,
-  },
-  menuItem: {
-    width: '100%',
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: colors.text,
-  },
-  menuText: {
-    fontSize: 18,
-    color: colors.text,
-  },
-  opcionesContainer: {
     position: 'absolute',
-    bottom: 0,
     left: 0,
-    right: 0,
+    top: 0,
+    bottom: 0,
+    width: width*0.75,
     backgroundColor: colors.background,
-    padding: 10,
-    borderTopWidth: 1,
-    borderTopColor: colors.text,
-  },
-  opcion: {
-    width: '100%',
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: colors.text,
-  },
-  opcionText: {
-    fontSize: 18,
-    color: colors.text,
+    paddingHorizontal: 20,
+    paddingVertical: 40,
+    borderTopRightRadius: 15,
+    borderBottomRightRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 10,
+    zIndex: 10,
+    borderColor: '#4682B4', // Azul acero
+    borderWidth: 2,
   },
   menuButton: {
-    position: 'absolute',
-    top: 20,
-    left: 20,
-    width: 50,
+    position: 'center',
+    top: 40,
+    left: 0,
+    width: 300,
     height: 50,
     backgroundColor: colors.primary,
     borderRadius: 25,
@@ -63,10 +46,20 @@ export const styles2 = {
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
+    zIndex: 10,
+    borderColor: '#FFA500', // Naranja
+    borderWidth: 2,
+  },
+  homeButton: {
+    top: 100,
+    borderColor: '#9370DB', // Púrpura medio
+    borderWidth: 2,
   },
   icon: {
     fontSize: 24,
     color: '#fff',
+    borderColor: '#FF1493', // Rosa profundo
+    borderWidth: 1,
   },
   overlay: {
     position: 'absolute',
@@ -75,32 +68,51 @@ export const styles2 = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0,0,0,0.5)',
+    zIndex: 9,
+    borderColor: '#696969', // Gris oscuro
+    borderWidth: 2,
   },
-  selectedContainer: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{ translateX: -100 }, { translateY: -100 }],
-    backgroundColor: colors.background,
-    padding: 20,
-    borderRadius: 10,
+  mapContainer: {
+    flex: 1,
+    overflow: 'hidden',
+    borderRadius: 20,
+    marginHorizontal: 10,
+    marginTop: 100,
+    paddingBottom: 70, 
+    justifyContent: 'center',
+    borderColor: '#00FA9A', // Verde menta
+    borderWidth: 2,
   },
-  selectedText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: colors.text,
+  mapStyle: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    borderColor: '#B0E0E6', // Azul pálido
+    borderWidth: 1,
   },
   goButton: {
-    width: '100%',
-    height: 40,
+    position: 'absolute',
+    bottom: 20,
+    alignSelf: 'center',
+    width: '80%',
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.primary,
-    borderRadius: 5,
-    marginTop: 10,
+    borderRadius: 25,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 4,
+    borderColor: '#FFD700', // Dorado
+    borderWidth: 2,
   },
   goButtonText: {
     fontSize: 18,
     color: '#fff',
+    fontWeight: 'bold',
+    borderColor: '#8A2BE2', // Azul violeta
+    borderWidth: 1,
   },
 };
